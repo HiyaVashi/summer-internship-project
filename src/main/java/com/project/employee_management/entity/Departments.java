@@ -18,22 +18,22 @@ public class Departments{
 
     private String description;
 
-    public Long getDepartmentId() {
+    public Long getDepartmentId(){
         return department_id;
     }
-    public void setDepartmentId(Long department_id) {
+    public void setDepartmentId(Long department_id){
         this.department_id = department_id;
     }
-    public String getName() {
+    public String getName(){
         return name;
     }
-    public void setName(String name) {
+    public void setName(String name){
         this.name=name;
     }
-    public String getDescription() {
+    public String getDescription(){
         return description;
     }
-    public void setDescription(String description) {
+    public void setDescription(String description){
         this.description = description;
     }
 

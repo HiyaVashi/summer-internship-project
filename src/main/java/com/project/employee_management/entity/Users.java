@@ -24,6 +24,8 @@ public class Users{
 
     private String password;
 
+    private String mobile_number;
+
     private String role;
 
     public Long getUser_id() {
@@ -56,6 +58,12 @@ public class Users{
     public void setPassword(String password) {
         this.password=password;
     }
+    public String getMobile_number() {
+    return mobile_number;
+}
+public void setMobile_number(String mobile_number) {
+    this.mobile_number = mobile_number;
+}
     public String getRole() {
         return role;
     }

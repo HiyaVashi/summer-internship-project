@@ -21,8 +21,7 @@ public class Attendance{
     private LocalDate attendance_date;
 
     private String status;
-
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name="user_id")
     private Users user;
 }
