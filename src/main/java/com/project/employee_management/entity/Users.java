@@ -25,6 +25,11 @@ public class Users{
     private String password;
 
     private String mobile_number;
+    private String city;
+
+private String state;
+
+private String address;
 
     private String role;
 
@@ -63,6 +68,24 @@ public class Users{
 }
 public void setMobile_number(String mobile_number) {
     this.mobile_number = mobile_number;
+}
+public String getCity() {
+    return city;
+}
+public void setCity(String city) {
+    this.city = city;
+}
+public String getState() {
+    return state;
+}
+public void setState(String state) {
+    this.state = state;
+}
+public String getAddress() {
+    return address;
+}
+public void setAddress(String address) {
+    this.address = address;
 }
     public String getRole() {
         return role;

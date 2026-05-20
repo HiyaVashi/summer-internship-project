@@ -200,15 +200,17 @@ document.getElementById("registrationForm").addEventListener("submit", function(
 
             body: JSON.stringify({
 
-                full_name: name,
-                gender: gender,
-                email: email,
-                password: "hello123",
-                role: "EMPLOYEE",
-                mobile_number: mobile
+    full_name: name,
+    gender: gender,
+    email: email,
+    password: "hello123",
+    role: "EMPLOYEE",
+    mobile_number: mobile,
+    city: city,
+    state: state,
+    address: address
 
-            })
-
+})
         })
 
         .then(response => response.json())
