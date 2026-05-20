@@ -1,0 +1,100 @@
+document.getElementById("loginForm").addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    let valid = true;
+
+    // Clear previous errors
+
+    document.getElementById("emailError").innerText = "";
+    document.getElementById("passwordError").innerText = "";
+    document.getElementById("successMsg").innerText = "";
+
+    // Email Validation
+
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+    if(email === ""){
+
+        document.getElementById("emailError").innerText =
+        "Email is required";
+
+        valid = false;
+    }
+
+    else if(!email.match(emailPattern)){
+
+        document.getElementById("emailError").innerText =
+        "Enter valid email address";
+
+        valid = false;
+    }
+
+    // Password Validation
+
+    if(password === ""){
+
+        document.getElementById("passwordError").innerText =
+        "Password is required";
+
+        valid = false;
+    }
+
+    else if(password.length < 8){
+
+        document.getElementById("passwordError").innerText =
+        "Password must be at least 8 characters";
+
+        valid = false;
+    }
+
+    // Success
+
+    // Login API Integration
+
+if(valid){
+
+    fetch("http://localhost:8080/auth/login", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+            email: email,
+            password: password
+
+        })
+
+    })
+
+    .then(response => response.text())
+
+    .then(token => {
+
+        console.log(token);
+
+        localStorage.setItem("token", token);
+
+        document.getElementById("successMsg").innerText =
+        "Login Successful!";
+
+    })
+
+    .catch(error => {
+
+        console.log(error);
+
+        document.getElementById("successMsg").innerText =
+        "Login Failed";
+
+    });
+
+}
+});

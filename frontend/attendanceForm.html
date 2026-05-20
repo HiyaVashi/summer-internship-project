@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Attendance Management</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/attendance.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- LEFT PANEL -->
+
+  <div class="left-panel">
+
+    <div class="icon-circle">
+      🕒
+    </div>
+
+    <h1>Attendance Portal</h1>
+
+    <p>
+      Manage employee attendance records,
+      monitor work shifts, check-in timings
+      and maintain daily attendance logs securely.
+    </p>
+
+  </div>
+
+  <!-- RIGHT PANEL -->
+
+  <div class="right-panel">
+
+    <h2>Attendance Management</h2>
+
+    <p class="subtitle">
+      Record employee attendance and work timings
+    </p>
+
+    <form id="attendanceForm">
+
+      <div class="form-grid">
+
+        <!-- Employee ID -->
+
+        <div class="form-group">
+
+          <label>Employee ID</label>
+
+          <input 
+            type="text"
+            value="EMP1023"
+            readonly
+          >
+
+        </div>
+
+        <!-- Employee Name -->
+
+        <div class="form-group">
+
+          <label>Employee Name</label>
+
+          <input 
+            type="text"
+            value="Rahul Sharma"
+            readonly
+          >
+
+        </div>
+
+        <!-- Department -->
+
+        <div class="form-group">
+
+          <label>Department</label>
+
+          <input 
+            type="text"
+            value="IT Department"
+            readonly
+          >
+
+        </div>
+
+        <!-- Attendance Date -->
+
+        <div class="form-group">
+
+          <label>Attendance Date</label>
+
+          <input type="date" id="attendanceDate">
+
+          <div class="error" id="dateError"></div>
+
+        </div>
+
+        <!-- Status -->
+
+        <div class="form-group">
+
+          <label>Status</label>
+
+          <select id="status">
+
+            <option value="">Select</option>
+
+            <option>Present</option>
+            <option>Absent</option>
+            <option>Half Day</option>
+            <option>Leave</option>
+            <option>Work From Home</option>
+
+          </select>
+
+          <div class="error" id="statusError"></div>
+
+        </div>
+
+        <!-- Shift -->
+
+        <div class="form-group">
+
+          <label>Shift</label>
+
+          <select id="shift">
+
+            <option value="">Select</option>
+
+            <option>Morning Shift</option>
+            <option>General Shift</option>
+            <option>Evening Shift</option>
+            <option>Night Shift</option>
+
+          </select>
+
+          <div class="error" id="shiftError"></div>
+
+        </div>
+
+        <!-- Check In -->
+
+        <div class="form-group">
+
+          <label>Check-In Time</label>
+
+          <input type="time" id="checkIn">
+
+          <div class="error" id="checkInError"></div>
+
+        </div>
+
+        <!-- Check Out -->
+
+        <div class="form-group">
+
+          <label>Check-Out Time</label>
+
+          <input type="time" id="checkOut">
+
+          <div class="error" id="checkOutError"></div>
+
+        </div>
+
+        <!-- Work Mode -->
+
+        <div class="form-group">
+
+          <label>Work Mode</label>
+
+          <select id="workMode">
+
+            <option value="">Select</option>
+
+            <option>Office</option>
+            <option>Remote</option>
+            <option>Hybrid</option>
+
+          </select>
+
+          <div class="error" id="workModeError"></div>
+
+        </div>
+
+        <!-- Location -->
+
+        <div class="form-group">
+
+          <label>Office Location</label>
+
+          <input 
+            type="text"
+            id="location"
+            placeholder="Enter office location"
+          >
+
+          <div class="error" id="locationError"></div>
+
+        </div>
+
+        <!-- Reporting Manager -->
+
+        <div class="form-group">
+
+          <label>Reporting Manager</label>
+
+          <input 
+            type="text"
+            id="manager"
+            placeholder="Manager name"
+          >
+
+          <div class="error" id="managerError"></div>
+
+        </div>
+
+        <!-- Remarks -->
+
+        <div class="form-group full-width">
+
+          <label>Remarks</label>
+
+          <textarea 
+            id="remarks"
+            placeholder="Enter attendance remarks"
+          ></textarea>
+
+        </div>
+
+      </div>
+
+      <button type="submit" class="submit-btn">
+        Mark Attendance
+      </button>
+
+      <div class="success" id="successMsg"></div>
+
+    </form>
+
+  </div>
+
+</div>
+<script src="js/attendance.js"></script>
+
+</body>
+</html>
