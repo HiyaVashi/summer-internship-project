@@ -12,8 +12,7 @@ public class LeaveService {
     @Autowired
     private LeaveRequestRepository leaveRequestRepository;
 
-    public LeaveRequests applyLeave(
-            LeaveRequests leaveRequest){
+    public LeaveRequests applyLeave(LeaveRequests leaveRequest){
 
         return leaveRequestRepository.save(leaveRequest);
     }

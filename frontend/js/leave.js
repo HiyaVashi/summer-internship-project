@@ -142,11 +142,14 @@ document.getElementById("leaveForm").addEventListener("submit", function(e){
 
             body: JSON.stringify({
 
-                leave_type: leaveType,
-                start_date: startDate,
-                end_date: endDate,
+                leaveType: leaveType,
+                startDate: startDate,
+                endDate: endDate,
                 reason: reason,
-                status: "PENDING"
+                status: "PENDING",
+                user: {
+                    user_id: 1
+                }
 
             })
 

@@ -4,15 +4,11 @@ document.getElementById("registrationForm").addEventListener("submit", function(
 
     let valid = true;
 
-    // Clear Previous Errors
-
     document.querySelectorAll(".error").forEach(el => {
         el.innerText = "";
     });
 
     document.getElementById("successMsg").innerText = "";
-
-    // Form Values
 
     const employeeId =
     document.getElementById("employeeId").value.trim();
@@ -111,13 +107,36 @@ document.getElementById("registrationForm").addEventListener("submit", function(
 
     if(dob === ""){
 
-        document.getElementById("dobError").innerText =
-        "Select DOB";
+    document.getElementById("dobError").innerText =
+    "Select DOB";
 
+    valid = false;
+}
+
+else {
+
+    let birthDate = new Date(dob);
+
+    let today = new Date();
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+
+    let monthDifference =
+    today.getMonth() - birthDate.getMonth();
+
+
+    if(
+        monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())
+    ){
+        age--;
+    }
+
+    if(age < 18){
+        document.getElementById("dobError").innerText ="Employee must be at least 18 years old";
         valid = false;
     }
 
-    // Department Validation
+}
 
     if(department === ""){
 
@@ -126,8 +145,6 @@ document.getElementById("registrationForm").addEventListener("submit", function(
 
         valid = false;
     }
-
-    // Designation Validation
 
     if(designation.length < 2){
 
