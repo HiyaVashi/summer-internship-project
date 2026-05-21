@@ -21,6 +21,25 @@ public class Attendance{
     private LocalDate attendance_date;
 
     private String status;
+
+    public Long getAttendanceId(){
+        return attendance_id;
+    }
+    public void setAttendanceId(Long attendance_id){
+        this.attendance_id=attendance_id;
+    }
+    public LocalDate getAttendanceDate(){
+        return attendance_date;
+    }
+    public void setAttendanceDate(LocalDate attendance_date){
+        this.attendance_date=attendance_date;
+    }
+    public String getStatus(){
+        return status;
+    }
+    public void setStatus(String status){
+        this.status=status;
+    }
     @ManyToOne
     @JoinColumn(name="user_id")
     private Users user;

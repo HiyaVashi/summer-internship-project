@@ -1,4 +1,5 @@
 package com.project.employee_management.entity;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,14 +24,13 @@ public class Users{
     private String email;
 
     private String password;
-
+    private LocalDate dob;
     private String mobile_number;
     private String city;
 
 private String state;
 
 private String address;
-
     private String role;
 
     public Long getUser_id() {
@@ -63,6 +63,12 @@ private String address;
     public void setPassword(String password) {
         this.password=password;
     }
+    public LocalDate getDob(){
+        return dob;
+    }
+    public void setDob(LocalDate dob){
+        this.dob=dob;
+    }
     public String getMobile_number() {
     return mobile_number;
 }
@@ -87,6 +93,7 @@ public String getAddress() {
 public void setAddress(String address) {
     this.address = address;
 }
+
     public String getRole() {
         return role;
     }
@@ -97,4 +104,11 @@ public void setAddress(String address) {
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Departments department;
+
+    public Departments getDepartment() {
+    return department;
+}
+public void setDepartment(Departments department) {
+    this.department = department;
+}
 }

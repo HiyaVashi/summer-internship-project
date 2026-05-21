@@ -52,6 +52,7 @@ document.getElementById("registrationForm").addEventListener("submit", function(
 
     const address =
     document.getElementById("address").value.trim();
+    
 
     // Employee ID Validation
 
@@ -208,7 +209,12 @@ document.getElementById("registrationForm").addEventListener("submit", function(
     mobile_number: mobile,
     city: city,
     state: state,
-    address: address
+    address: address,
+    dob: dob,
+
+    department: {
+    department_id: Number(department)
+}
 
 })
         })

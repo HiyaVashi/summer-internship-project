@@ -1,4 +1,5 @@
 package com.project.employee_management.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -6,20 +7,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.employee_management.entity.Users;
-import com.project.employee_management.service.UserService;
+import com.project.employee_management.entity.LeaveRequests;
+import com.project.employee_management.service.LeaveService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5500")
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/leave")
+public class LeaveController {
 
     @Autowired
-    private UserService userService;
+    private LeaveService leaveService;
 
-    @PostMapping("/register")
-    public Users registerUser(@RequestBody Users user) {
-        
-        return userService.registerUser(user);
+    @PostMapping("/apply")
+    public LeaveRequests applyLeave(
+            @RequestBody LeaveRequests leaveRequest){
+
+        return leaveService.applyLeave(leaveRequest);
     }
 }
