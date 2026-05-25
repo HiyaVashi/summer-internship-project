@@ -134,13 +134,60 @@ document.getElementById("attendanceForm").addEventListener("submit", function(e)
 
     // Success
 
-    if(valid){
+    // Backend API Integration
 
-      document.getElementById("successMsg").innerText =
-      "Attendance Marked Successfully!";
+if(valid){
 
-      document.getElementById("attendanceForm").reset();
+    fetch("http://localhost:8080/attendance/mark", {
 
-    }
+        method: "POST",
 
+        headers: {
+            "Content-Type": "application/json",
+
+            "Authorization":
+            "Bearer " + localStorage.getItem("token")
+        },
+
+        body: JSON.stringify({
+
+            attendanceDate: attendanceDate,
+
+            checkInTime: checkIn,
+
+            checkOutTime: checkOut,
+
+            status: status,
+
+            user: {
+                user_id: 1
+            }
+
+        })
+
+    })
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        console.log(data);
+
+        document.getElementById("successMsg").innerText =
+        "Attendance Marked Successfully!";
+
+        document.getElementById("attendanceForm").reset();
+
+    })
+
+    .catch(error => {
+
+        console.log(error);
+
+        document.getElementById("successMsg").innerText =
+        "Attendance Mark Failed";
+
+    });
+
+  }
 });

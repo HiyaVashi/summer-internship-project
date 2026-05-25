@@ -68,9 +68,9 @@ public class LeaveRequests {
     @JoinColumn(name = "user_id")
     private Users user;
     public Users getUser() {
-    return user;
-}
-public void setUser(Users user) {
-    this.user = user;
-}
+        return user;
+    }
+    public void setUser(Users user) {
+        this.user = user;
+    }
 }
