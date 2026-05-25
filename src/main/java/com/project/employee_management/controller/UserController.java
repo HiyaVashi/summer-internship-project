@@ -12,6 +12,8 @@ import com.project.employee_management.entity.Users;
 import com.project.employee_management.repository.UserRepository;
 import com.project.employee_management.security.JwtUtil;
 import com.project.employee_management.service.UserService;
+
+import jakarta.validation.Valid;
 @RestController
 @CrossOrigin(origins = "http://localhost:5500")
 @RequestMapping("/users")
@@ -21,7 +23,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public Users registerUser(@RequestBody Users user) {
+    public Users registerUser(@Valid @RequestBody Users user) {
         
         return userService.registerUser(user);
     }

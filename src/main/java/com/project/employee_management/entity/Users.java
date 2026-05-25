@@ -8,7 +8,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "users")
 public class Users{
@@ -17,21 +19,33 @@ public class Users{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
 
-    private String full_name;
+        @NotBlank(message = "Full name is required")
+private String full_name;
+
+@Email(message = "Invalid email format")
+
+@NotBlank(message = "Email is required")
+private String email;
+
+@Size(min = 8, message = "Password must be at least 8 characters")
+
+private String password;
+
+@NotBlank(message = "Mobile number is required")
+private String mobile_number;
+
+// @NotBlank(message = "Role is required")
+// private String role;
 
     private String gender;
 
-    private String email;
-
-    private String password;
     private LocalDate dob;
-    private String mobile_number;
     private String city;
 
 private String state;
 
 private String address;
-    private String role;
+   
 
     public Long getUser_id() {
         return user_id;
@@ -94,12 +108,13 @@ public void setAddress(String address) {
     this.address = address;
 }
 
-    public String getRole() {
-        return role;
-    }
-    public void setRole(String role) {
-        this.role = role;
-    }
+    // public String getRole() {
+    //     return role;
+    // }
+    // public void setRole(String role) {
+    //     this.role = role;
+    // }
+
 
     @ManyToOne
     @JoinColumn(name = "department_id")
@@ -109,6 +124,6 @@ public void setAddress(String address) {
     return department;
 }
 public void setDepartment(Departments department) {
-    this.department = department;
+    this.department = department; 
 }
 }

@@ -16,14 +16,11 @@ fetch("http://localhost:8080/users/me", {
 
     currentUserId = data.user_id;
 
-    document.getElementById("employeeId").value =
-    data.user_id;
+    document.getElementById("employeeId").value = data.user_id;
 
-    document.getElementById("employeeName").value =
-    data.full_name;
+    document.getElementById("employeeName").value = data.full_name;
 
-    document.getElementById("department").value =
-    data.department.name;
+    document.getElementById("department").value = data.department.name;
 
 });
 
@@ -32,8 +29,6 @@ document.getElementById("leaveForm").addEventListener("submit", function(e){
     e.preventDefault();
 
     let valid = true;
-
-    // Clear Errors
 
     document.querySelectorAll(".error").forEach(el => {
         el.innerText = "";
