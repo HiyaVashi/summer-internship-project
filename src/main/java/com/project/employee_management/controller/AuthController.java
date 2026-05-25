@@ -26,10 +26,8 @@ public class AuthController {
     @PostMapping("/login")
     public String login(@RequestBody LoginRequest request) {
 
-        Users user =
-                userRepository.findByEmail(
-                        request.getEmail()
-                );
+        Users user = userRepository.findByEmail(request.getEmail())
+        .orElseThrow();
 
         if (user == null) {
             return "User not found";

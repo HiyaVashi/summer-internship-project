@@ -19,6 +19,9 @@ document.getElementById("registrationForm").addEventListener("submit", function(
     const email =
     document.getElementById("email").value.trim();
 
+    const password =
+document.getElementById("password").value.trim();
+
     const mobile =
     document.getElementById("mobile").value.trim();
 
@@ -82,6 +85,14 @@ document.getElementById("registrationForm").addEventListener("submit", function(
 
         valid = false;
     }
+
+    if(password.length < 8){
+
+    document.getElementById("passwordError").innerText =
+    "Password must be at least 8 characters";
+
+    valid = false;
+}
 
     // Mobile Validation
 
@@ -221,7 +232,7 @@ else {
     full_name: name,
     gender: gender,
     email: email,
-    password: "hello123",
+    password: password,
     role: "EMPLOYEE",
     mobile_number: mobile,
     city: city,

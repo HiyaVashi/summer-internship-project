@@ -1,3 +1,32 @@
+let currentUserId;
+
+fetch("http://localhost:8080/users/me", {
+
+    headers: {
+        "Authorization":
+        "Bearer " + localStorage.getItem("token")
+    }
+
+})
+.then(response => response.json())
+
+.then(data => {
+
+    console.log(data);
+
+    currentUserId = data.user_id;
+
+    document.getElementById("employeeId").value =
+    data.user_id;
+
+    document.getElementById("employeeName").value =
+    data.full_name;
+
+    document.getElementById("department").value =
+    data.department.name;
+
+});
+
 document.getElementById("leaveForm").addEventListener("submit", function(e){
 
     e.preventDefault();
@@ -148,7 +177,7 @@ document.getElementById("leaveForm").addEventListener("submit", function(e){
                 reason: reason,
                 status: "PENDING",
                 user: {
-                    user_id: 1
+                    user_id: currentUserId
                 }
 
             })

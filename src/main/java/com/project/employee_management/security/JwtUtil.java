@@ -1,10 +1,10 @@
 package com.project.employee_management.security;
 
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
-
 import java.security.Key;
 import java.util.Date;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 
 public class JwtUtil {
 
@@ -30,6 +30,7 @@ public class JwtUtil {
 
                 .compact();
     }
+    
 
     public static String extractUsername(String token) {
 
