@@ -67,12 +67,10 @@ data.forEach(leave => {
 }
 
 fetch("http://localhost:8080/users/me", {
-
     headers: {
         "Authorization":
         "Bearer " + localStorage.getItem("token")
     }
-
 })
 .then(response => response.json())
 
@@ -126,7 +124,6 @@ fetch("http://localhost:8080/users/me", {
     });
 
 }
-
     document.getElementById("employeeId").value = data.userId;
 
     document.getElementById("employeeName").value = data.full_name;

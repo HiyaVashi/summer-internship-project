@@ -92,7 +92,7 @@
 
         <!-- Attendance Date -->
 
-        <div class="form-group">
+        <!-- <div class="form-group">
 
           <label>Attendance Date</label>
 
@@ -100,38 +100,19 @@
 
           <div class="error" id="dateError"></div>
 
-        </div>
+        </div> -->
 
-        <!-- Status -->
+        
 
-        <div class="form-group">
-
-          <label>Status</label>
-
-          <select id="status">
-
-            <option value="">Select</option>
-
-            <option>Present</option>
-            <option>Absent</option>
-            <option>Half Day</option>
-            <option>Leave</option>
-            <option>Work From Home</option>
-
-          </select>
-
-          <div class="error" id="statusError"></div>
-
-        </div>
-
+        
         <!-- Shift -->
 
-        <div class="form-group">
+        <!-- <div class="form-group">
 
           <label>Shift</label>
-
+          
           <select id="shift">
-
+            
             <option value="">Select</option>
 
             <option>Morning Shift</option>
@@ -143,70 +124,103 @@
 
           <div class="error" id="shiftError"></div>
 
-        </div>
+        </div> -->
 
         <!-- Check In -->
 
-        <div class="form-group">
+        <!-- <div class="form-group">
 
           <label>Check-In Time</label>
-
+          
           <input type="time" id="checkIn">
 
           <div class="error" id="checkInError"></div>
 
-        </div>
+        </div> -->
 
         <!-- Check Out -->
 
-        <div class="form-group">
+        <!-- <div class="form-group">
 
           <label>Check-Out Time</label>
 
           <input type="time" id="checkOut">
 
           <div class="error" id="checkOutError"></div>
-
-        </div>
-
+          
+        </div> -->
+        
         <!-- Work Mode -->
-
-        <div class="form-group">
-
-          <label>Work Mode</label>
-
-          <select id="workMode">
-
-            <option value="">Select</option>
-
-            <option>Office</option>
-            <option>Remote</option>
-            <option>Hybrid</option>
-
-          </select>
-
-          <div class="error" id="workModeError"></div>
-
-        </div>
-
+        
+        
         <!-- Location -->
-
-        <div class="form-group">
-
+        
+        <!-- <div class="form-group">
+          
           <label>Office Location</label>
-
+          
           <input 
-            type="text"
-            id="location"
-            placeholder="Enter office location"
+          type="text"
+          id="location"
+          placeholder="Enter office location"
           >
-
+          
           <div class="error" id="locationError"></div>
 
-        </div>
+        </div> -->
+        <button type="button"
+        id="checkInBtn">
+        
+        Check In
+        
+      </button>
 
-        <!-- Reporting Manager -->
+<button type="button"
+id="checkOutBtn">
 
+Check Out
+
+</button>
+
+<!-- Status -->
+<div class="form-group">
+
+  <label>Status</label>
+
+  <select id="status">
+
+    <option value="">Select</option>
+
+    <option>Present</option>
+    <option>Absent</option>
+    <option>Half Day</option>
+    <option>Leave</option>
+    <option>Work From Home</option>
+
+  </select>
+
+  <div class="error" id="statusError"></div>
+
+</div>
+
+
+  <div class="form-group">
+
+    <label>Work Mode</label>
+
+    <select id="workMode">
+
+      <option value="">Select</option>
+
+      <option>Office</option>
+      <option>Remote</option>
+      <option>Hybrid</option>
+
+    </select>
+
+    <div class="error" id="workModeError"></div>
+
+  </div>
         <div class="form-group">
 
           <label>Reporting Manager</label>
@@ -221,6 +235,10 @@
 
         </div>
 
+        <div id="attendanceInfo">
+
+</div>
+
         <!-- Remarks -->
 
         <div class="form-group full-width">
@@ -231,14 +249,11 @@
             id="remarks"
             placeholder="Enter attendance remarks"
           ></textarea>
+          <div class="error" id="remarksError"></div>
 
         </div>
 
       </div>
-
-      <button type="submit" class="submit-btn">
-        Mark Attendance
-      </button>
 
       <div class="success" id="successMsg"></div>
 

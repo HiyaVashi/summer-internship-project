@@ -1,5 +1,11 @@
 let currentUserId;
 
+let checkInTime = null;
+
+let checkOutTime = null;
+
+// FETCH LOGGED IN USER
+
 fetch("http://localhost:8080/users/me", {
 
     headers: {
@@ -8,16 +14,19 @@ fetch("http://localhost:8080/users/me", {
     }
 
 })
+
 .then(response => response.json())
 
 .then(data => {
 
     console.log(data);
 
-    currentUserId = data.user_id;
+    currentUserId = data.userId;
+
+    // AUTO FILL USER DETAILS
 
     document.getElementById("employeeId").value =
-    data.user_id;
+    data.userId;
 
     document.getElementById("employeeName").value =
     data.full_name;
@@ -27,146 +36,206 @@ fetch("http://localhost:8080/users/me", {
 
 });
 
+// CHECK IN BUTTON
 
-document.getElementById("attendanceForm").addEventListener("submit", function(e){
+document.getElementById("checkInBtn")
+.addEventListener("click", function(){
 
-    e.preventDefault();
+    const now = new Date();
 
-    let valid = true;
+    checkInTime =
+    now.toTimeString().slice(0,5);
 
-    // Clear Errors
+    // CLEAR OLD SUCCESS MESSAGE
 
-    document.querySelectorAll(".error").forEach(el => {
-      el.innerText = "";
-    });
+    document.getElementById("successMsg")
+    .innerText = "";
 
-    document.getElementById("successMsg").innerText = "";
+    // DISPLAY CHECK IN
 
-    // Values
+    document.getElementById("attendanceInfo")
+    .innerHTML = `
 
-    const attendanceDate =
-    document.getElementById("attendanceDate").value;
+        <p>
+            Check In Time:
+            ${checkInTime}
+        </p>
+
+    `;
+
+});
+
+// CHECK OUT BUTTON
+
+document.getElementById("checkOutBtn")
+.addEventListener("click", function(){
+
+    // VALIDATE CHECK IN FIRST
+
+    if(checkInTime === null){
+
+        document.getElementById("successMsg")
+        .innerText =
+        "Please check in first";
+
+        return;
+    }
+
+    // CLEAR OLD ERRORS
+
+    document.getElementById("statusError")
+    .innerText = "";
+
+    document.getElementById("workModeError")
+    .innerText = "";
+
+    document.getElementById("managerError")
+    .innerText = "";
+
+    document.getElementById("remarksError")
+    .innerText = "";
+
+    // FORM VALUES
 
     const status =
     document.getElementById("status").value;
 
-    const shift =
-    document.getElementById("shift").value;
-
-    const checkIn =
-    document.getElementById("checkIn").value;
-
-    const checkOut =
-    document.getElementById("checkOut").value;
-
     const workMode =
     document.getElementById("workMode").value;
-
-    const location =
-    document.getElementById("location").value.trim();
 
     const manager =
     document.getElementById("manager").value.trim();
 
-    // Attendance Date
+    const remarks =
+    document.getElementById("remarks").value.trim();
 
-    if(attendanceDate === ""){
-
-      document.getElementById("dateError").innerText =
-      "Select attendance date";
-
-      valid = false;
-    }
-
-    // Status
+    // VALIDATIONS
 
     if(status === ""){
 
-      document.getElementById("statusError").innerText =
-      "Select attendance status";
+        document.getElementById("statusError")
+        .innerText =
+        "Select attendance status";
 
-      valid = false;
+        return;
     }
-
-    // Shift
-
-    if(shift === ""){
-
-      document.getElementById("shiftError").innerText =
-      "Select shift";
-
-      valid = false;
-    }
-
-    // Check In
-
-    if(checkIn === ""){
-
-      document.getElementById("checkInError").innerText =
-      "Enter check-in time";
-
-      valid = false;
-    }
-
-    // Check Out
-
-    if(checkOut === ""){
-
-      document.getElementById("checkOutError").innerText =
-      "Enter check-out time";
-
-      valid = false;
-    }
-
-    // Time Validation
-
-    if(checkIn !== "" && checkOut !== ""){
-
-      if(checkOut <= checkIn){
-
-        document.getElementById("checkOutError").innerText =
-        "Check-out must be after check-in";
-
-        valid = false;
-      }
-
-    }
-
-    // Work Mode
 
     if(workMode === ""){
 
-      document.getElementById("workModeError").innerText =
-      "Select work mode";
+        document.getElementById("workModeError")
+        .innerText =
+        "Select work mode";
 
-      valid = false;
+        return;
     }
-
-    // Location
-
-    if(location.length < 3){
-
-      document.getElementById("locationError").innerText =
-      "Enter valid location";
-
-      valid = false;
-    }
-
-    // Manager
 
     if(manager.length < 3){
 
-      document.getElementById("managerError").innerText =
-      "Enter valid manager name";
+        document.getElementById("managerError")
+        .innerText =
+        "Enter valid manager name";
 
-      valid = false;
+        return;
     }
 
-    // Success
+    if(remarks !== "" && remarks.length < 3){
 
-    // Backend API Integration
+        document.getElementById("remarksError")
+        .innerText =
+        "Remarks too short";
 
-if(valid){
+        return;
+    }
+
+    if(remarks.length > 200){
+
+        document.getElementById("remarksError")
+        .innerText =
+        "Remarks cannot exceed 200 characters";
+
+        return;
+    }
+
+    const remarksPattern =
+    /^[a-zA-Z0-9\s.,!?()-]*$/;
+
+    if(!remarksPattern.test(remarks)){
+
+        document.getElementById("remarksError")
+        .innerText =
+        "Remarks should not contain unnecessary special characters";
+
+        return;
+    }
+
+    // CHECK OUT TIME ONLY AFTER VALIDATION PASSES
+
+    const now = new Date();
+
+    checkOutTime =
+    now.toTimeString().slice(0,5);
+
+    // CALCULATE TOTAL HOURS
+
+    let checkInDate =
+    new Date(`1970-01-01T${checkInTime}:00`);
+
+    let checkOutDate =
+    new Date(`1970-01-01T${checkOutTime}:00`);
+
+    let diffMs =
+    checkOutDate - checkInDate;
+
+    // DECIMAL VALUE FOR DATABASE
+
+    let totalHoursDecimal =
+    diffMs / (1000 * 60 * 60);
+
+    totalHoursDecimal =
+    totalHoursDecimal.toFixed(2);
+
+    // DISPLAY VALUE FOR UI
+
+    let totalMinutes =
+    Math.floor(diffMs / (1000 * 60));
+
+    let hours =
+    Math.floor(totalMinutes / 60);
+
+    let minutes =
+    totalMinutes % 60;
+
+    let totalHoursDisplay =
+    `${hours} hrs ${minutes} mins`;
+
+    // DISPLAY ATTENDANCE INFO
+
+    document.getElementById("attendanceInfo")
+    .innerHTML = `
+
+        <p>
+            Check In Time:
+            ${checkInTime}
+        </p>
+
+        <p>
+            Check Out Time:
+            ${checkOutTime}
+        </p>
+
+        <p>
+            Total Hours Worked:
+            ${totalHoursDisplay}
+        </p>
+
+    `;
+
+    // TODAY'S DATE
+
+    const today =
+    new Date().toISOString().split("T")[0];
+
+    // BACKEND API CALL
 
     fetch("http://localhost:8080/attendance/mark", {
 
@@ -181,16 +250,20 @@ if(valid){
 
         body: JSON.stringify({
 
-            attendanceDate: attendanceDate,
+            attendanceDate: today,
 
-            checkInTime: checkIn,
+            checkInTime: checkInTime,
 
-            checkOutTime: checkOut,
+            checkOutTime: checkOutTime,
+
+            totalHours: totalHoursDecimal,
+
+            remarks: remarks,
 
             status: status,
 
             user: {
-                user_id: currentUserId
+                userId: currentUserId
             }
 
         })
@@ -203,10 +276,9 @@ if(valid){
 
         console.log(data);
 
-        document.getElementById("successMsg").innerText =
+        document.getElementById("successMsg")
+        .innerText =
         "Attendance Marked Successfully!";
-
-        document.getElementById("attendanceForm").reset();
 
     })
 
@@ -214,10 +286,10 @@ if(valid){
 
         console.log(error);
 
-        document.getElementById("successMsg").innerText =
+        document.getElementById("successMsg")
+        .innerText =
         "Attendance Mark Failed";
 
     });
 
-  }
 });
