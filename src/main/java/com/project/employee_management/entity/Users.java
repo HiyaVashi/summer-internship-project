@@ -17,7 +17,7 @@ public class Users{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    private Long userId;
 
         @NotBlank(message = "Full name is required")
 private String full_name;
@@ -34,8 +34,8 @@ private String password;
 @NotBlank(message = "Mobile number is required")
 private String mobile_number;
 
-// @NotBlank(message = "Role is required")
-// private String role;
+@NotBlank(message = "Role is required")
+private String role;
 
     private String gender;
 
@@ -47,11 +47,11 @@ private String state;
 private String address;
    
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
     public String getFull_name() {
         return full_name;
@@ -108,12 +108,12 @@ public void setAddress(String address) {
     this.address = address;
 }
 
-    // public String getRole() {
-    //     return role;
-    // }
-    // public void setRole(String role) {
-    //     this.role = role;
-    // }
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
+    }
 
 
     @ManyToOne

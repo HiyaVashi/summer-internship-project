@@ -74,18 +74,29 @@ if(valid){
 
     })
 
-    .then(response => response.text())
+    .then(response => response.json())
 
-    .then(token => {
+.then(data => {
 
-        console.log(token);
+    console.log(data);
 
-        localStorage.setItem("token", token);
+    localStorage.setItem(
+        "token",
+        data.token
+    );
 
-        document.getElementById("successMsg").innerText =
-        "Login Successful!";
+    localStorage.setItem(
+        "role",
+        data.role
+    );
+    window.location.href =
+    "index.html";
 
-    })
+    document.getElementById("successMsg").innerText =
+    "Login Successful!";
+
+
+})
 
     .catch(error => {
 

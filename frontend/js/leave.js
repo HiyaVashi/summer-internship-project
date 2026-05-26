@@ -1,5 +1,71 @@
 let currentUserId;
 
+const role =
+localStorage.getItem("role");
+
+if(role === "HR"){
+
+    document
+    .getElementById("employeeLeaveSection")
+    .style.display = "none";
+
+    document
+    .getElementById("hrLeaveSection")
+    .style.display = "block";
+}
+if(role === "HR"){
+
+    fetch("http://localhost:8080/leave/all")
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        console.log(data);
+        const container =
+document.getElementById(
+    "leaveRequestsContainer"
+);
+
+data.forEach(leave => {
+
+    container.innerHTML += `
+
+        <div>
+
+            <h3>
+                ${leave.user.full_name}
+            </h3>
+
+            <p>
+                ${leave.leaveType}
+            </p>
+            <p>
+    Reason:
+    ${leave.reason}
+</p>
+            <p>
+                ${leave.status}
+            </p>
+
+            <button onclick="approveLeave(${leave.leaveRequestId})">
+                Approve
+            </button>
+
+            <button onclick="rejectLeave(${leave.leaveRequestId})">
+                Reject
+            </button>
+
+        </div>
+
+        <hr>
+    `;
+});
+
+    });
+
+}
+
 fetch("http://localhost:8080/users/me", {
 
     headers: {
@@ -14,15 +80,61 @@ fetch("http://localhost:8080/users/me", {
 
     console.log(data);
 
-    currentUserId = data.user_id;
+    currentUserId = data.userId;
 
-    document.getElementById("employeeId").value = data.user_id;
+    if(role !== "HR"){
+
+    fetch(
+        `http://localhost:8080/leave/my-leaves/${currentUserId}`
+    )
+
+    .then(response => response.json())
+
+    .then(leaves => {
+
+        const container =
+        document.getElementById(
+            "myLeaveContainer"
+        );
+
+        leaves.forEach(leave => {
+
+            container.innerHTML += `
+
+                <div>
+
+                    <p>
+                        ${leave.leaveType}
+                    </p>
+
+                    <p>
+                        ${leave.startDate} to ${leave.endDate}
+                    </p>
+
+                    <p>
+                        Status:
+                        ${leave.status}
+                    </p>
+
+                </div>
+
+                <hr>
+
+            `;
+        });
+
+    });
+
+}
+
+    document.getElementById("employeeId").value = data.userId;
 
     document.getElementById("employeeName").value = data.full_name;
 
     document.getElementById("department").value = data.department.name;
 
 });
+if(role !== "HR"){
 
 document.getElementById("leaveForm").addEventListener("submit", function(e){
 
@@ -204,3 +316,45 @@ document.getElementById("leaveForm").addEventListener("submit", function(e){
     }
 
 });
+}
+function approveLeave(id){
+
+    fetch(
+        `http://localhost:8080/leave/approve/${id}`,
+        {
+            method: "PUT"
+        }
+    )
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        alert("Leave Approved");
+
+        location.reload();
+
+    });
+
+}
+
+function rejectLeave(id){
+
+    fetch(
+        `http://localhost:8080/leave/reject/${id}`,
+        {
+            method: "PUT"
+        }
+    )
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        alert("Leave Rejected");
+
+        location.reload();
+
+    });
+
+}

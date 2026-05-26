@@ -63,6 +63,7 @@
       text-align:center;
     }
 
+
     .icon-circle{
       width:100px;
       height:100px;
@@ -91,7 +92,8 @@
     .right-panel{
       width:72%;
       padding:22px 28px;
-      overflow:hidden;
+      max-height: 90vh;
+    overflow-y: auto;
     }
 
     .right-panel h2{
