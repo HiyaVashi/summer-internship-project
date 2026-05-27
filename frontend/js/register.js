@@ -215,6 +215,27 @@ else {
         valid = false;
     }
 
+
+const formData = new FormData();
+
+formData.append("full_name", name);
+formData.append("gender", gender);
+
+formData.append("email", email);
+
+formData.append("password", password);
+formData.append("mobile_number",  mobile);
+formData.append("city",city);
+formData.append("state", state);
+formData.append("address", address);
+formData.append("dob", dob);
+
+formData.append("department.department_id",department);
+
+formData.append("role", "EMPLOYEE");
+
+formData.append("photo", document.getElementById("photo").files[0]);
+
     // Backend API Integration
 
     if(valid){
@@ -223,28 +244,28 @@ else {
 
             method: "POST",
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+            body:formData
 
-            body: JSON.stringify({
 
-    full_name: name,
-    gender: gender,
-    email: email,
-    password: password,
-    role: "EMPLOYEE",
-    mobile_number: mobile,
-    city: city,
-    state: state,
-    address: address,
-    dob: dob,
 
-    department: {
-    department_id: Number(department)
-}
+//             body: JSON.stringify({
 
-})
+//     full_name: name,
+//     gender: gender,
+//     email: email,
+//     password: password,
+//     role: "EMPLOYEE",
+//     mobile_number: mobile,
+//     city: city,
+//     state: state,
+//     address: address,
+//     dob: dob,
+
+//     department: {
+//     department_id: Number(department)
+// }
+
+// })
         })
 
         .then(response => response.json())
