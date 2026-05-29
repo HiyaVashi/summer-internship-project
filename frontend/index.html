@@ -38,8 +38,8 @@
 
   </div>
 
-  <button class="login-btn">
-    Dashboard
+  <button id="logoutBtn">
+    Log Out
   </button>
 
 </nav>
@@ -222,5 +222,18 @@
 
 </footer>
 
+<script>
+document.getElementById("logoutBtn")
+.addEventListener("click", function(){
+
+    localStorage.removeItem("token");
+
+    localStorage.removeItem("role");
+
+    window.location.href =
+    "loginForm.html";
+
+});
+</script>
 </body>
 </html>

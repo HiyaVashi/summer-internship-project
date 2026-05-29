@@ -91,7 +91,8 @@
     .right-panel{
       width:72%;
       padding:22px 28px;
-      overflow:hidden;
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
     .right-panel h2{
@@ -152,6 +153,52 @@
       resize:none;
       height:75px;
     }
+    #pageContent{
+
+    display: none;
+}
+
+#taskDescription{
+
+    width: 100%;
+
+    min-height: 120px;
+
+    resize: vertical;
+
+    padding: 15px;
+
+    border: 1px solid #d0d7e2;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+}
+
+#taskSuccessMsg{
+
+    margin-top: 15px;
+
+    font-weight: 600;
+}
+    #closeBtn{
+
+    position: absolute;
+
+    top: 20px;
+
+    color:white;
+
+    right: 20px;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
 
     input[readonly]{
       background:#e2e8f0;

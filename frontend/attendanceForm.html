@@ -14,6 +14,7 @@
 
 <body>
 
+  <div id="pageContent">
 <div class="container">
 
   <!-- LEFT PANEL -->
@@ -43,7 +44,7 @@
     <p class="subtitle">
       Record employee attendance and work timings
     </p>
-
+    
     <form id="attendanceForm">
 
       <div class="form-grid">
@@ -90,84 +91,7 @@
 
         </div>
 
-        <!-- Attendance Date -->
-
-        <!-- <div class="form-group">
-
-          <label>Attendance Date</label>
-
-          <input type="date" id="attendanceDate">
-
-          <div class="error" id="dateError"></div>
-
-        </div> -->
-
-        
-
-        
-        <!-- Shift -->
-
-        <!-- <div class="form-group">
-
-          <label>Shift</label>
-          
-          <select id="shift">
-            
-            <option value="">Select</option>
-
-            <option>Morning Shift</option>
-            <option>General Shift</option>
-            <option>Evening Shift</option>
-            <option>Night Shift</option>
-
-          </select>
-
-          <div class="error" id="shiftError"></div>
-
-        </div> -->
-
-        <!-- Check In -->
-
-        <!-- <div class="form-group">
-
-          <label>Check-In Time</label>
-          
-          <input type="time" id="checkIn">
-
-          <div class="error" id="checkInError"></div>
-
-        </div> -->
-
-        <!-- Check Out -->
-
-        <!-- <div class="form-group">
-
-          <label>Check-Out Time</label>
-
-          <input type="time" id="checkOut">
-
-          <div class="error" id="checkOutError"></div>
-          
-        </div> -->
-        
-        <!-- Work Mode -->
-        
-        
-        <!-- Location -->
-        
-        <!-- <div class="form-group">
-          
-          <label>Office Location</label>
-          
-          <input 
-          type="text"
-          id="location"
-          placeholder="Enter office location"
-          >
-          
-          <div class="error" id="locationError"></div>
-
-        </div> -->
+    
         <button type="button"
         id="checkInBtn">
         
@@ -247,7 +171,7 @@ Check Out
 
           <textarea 
             id="remarks"
-            placeholder="Enter attendance remarks"
+            placeholder="Enter attendance remarks and what you worked on today."
           ></textarea>
           <div class="error" id="remarksError"></div>
 
@@ -257,11 +181,102 @@ Check Out
 
       <div class="success" id="successMsg"></div>
 
+      <div id="adminTaskSection">
+
+    <h2>Assign Task</h2>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label>Employee</label>
+
+            <select id="employeeDropdown">
+
+                <option value="">
+                    Select Employee
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Task Title</label>
+
+            <input
+                type="text"
+                id="taskTitle"
+                placeholder="Enter task title"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Deadline</label>
+
+            <input
+                type="date"
+                id="taskDeadline"
+            >
+
+        </div>
+
+        <div class="form-group full-width">
+
+            <label>Task Description</label>
+
+            <textarea
+                id="taskDescription"
+                rows="4"
+                placeholder="Enter task description"
+            ></textarea>
+
+        </div>
+
+    </div>
+
+    <button
+        type="button"
+        id="assignTaskBtn"
+        class="submit-btn">
+
+        Assign Task
+
+    </button>
+
+    <div
+        id="taskSuccessMsg"
+        class="success">
+
+    </div>
+
+</div>
+
+
+<div id="employeeTaskSection">
+
+    <h2>My Tasks</h2>
+
+    <div id="taskContainer">
+
+    </div>
+
+</div>
+
     </form>
+    </div>
 
   </div>
 
 </div>
+<button type="button" id="closeBtn">
+
+    ← Dashboard
+
+</button>
 <script src="js/attendance.js"></script>
 
 </body>

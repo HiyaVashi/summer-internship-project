@@ -58,6 +58,17 @@
       transition:0.3s;
     }
 
+    #logoutBtn{
+      padding:10px 22px;
+      border:none;
+      border-radius:10px;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color:white;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.3s;
+    }
+
     .login-btn:hover{
       transform:translateY(-2px);
       box-shadow:0 10px 20px rgba(37,99,235,0.2);

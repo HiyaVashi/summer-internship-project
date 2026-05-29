@@ -1,3 +1,24 @@
+const token =
+localStorage.getItem("token");
+
+if(!token){
+
+    window.location.href =
+    "loginForm.html";
+}
+else{
+
+    document.getElementById("pageContent")
+    .style.display = "block";
+}
+
+document.getElementById("closeBtn").addEventListener("click", function(){
+
+    window.location.href =
+    "index.html";
+
+});
+
 let currentUserId;
 
 const role =

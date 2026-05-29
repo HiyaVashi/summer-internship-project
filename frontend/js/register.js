@@ -1,3 +1,9 @@
+document.getElementById("closeBtn").addEventListener("click", function(){
+
+    window.location.href =
+    "index.html";
+
+});
 document.getElementById("registrationForm").addEventListener("submit", function(e){
 
     e.preventDefault();

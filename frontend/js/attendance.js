@@ -1,3 +1,94 @@
+
+const token =
+localStorage.getItem("token");
+
+if(!token){
+
+    window.location.href =
+    "loginForm.html";
+}
+else{
+
+    document.getElementById("pageContent")
+    .style.display = "block";
+}
+
+document.getElementById("closeBtn").addEventListener("click", function(){
+
+    window.location.href =
+    "index.html";
+
+});
+
+const role =localStorage.getItem("role");
+
+if(role === "ADMIN"){
+
+    document.getElementById("adminTaskSection")
+    .style.display = "block";
+
+    document.getElementById("employeeTaskSection")
+    .style.display = "none";
+
+    // Hide only unnecessary fields
+
+    document.getElementById("manager")
+    .parentElement.style.display = "none";
+
+    document.getElementById("remarks")
+    .parentElement.style.display = "none";
+
+    fetch("http://localhost:8080/users/employees")
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        const dropdown =
+        document.getElementById(
+            "employeeDropdown"
+        );
+
+        data.forEach(employee => {
+
+            const option =
+            document.createElement("option");
+
+            option.value =
+            employee.userId;
+
+            option.textContent =
+            employee.full_name;
+
+            dropdown.appendChild(option);
+
+        });
+
+    });
+}
+
+else if(role === "EMPLOYEE"){
+
+    document
+    .getElementById("adminTaskSection")
+    .style.display = "none";
+
+    document
+    .getElementById("employeeTaskSection")
+    .style.display = "block";
+}
+
+else{
+
+    document
+    .getElementById("adminTaskSection")
+    .style.display = "none";
+
+    document
+    .getElementById("employeeTaskSection")
+    .style.display = "none";
+}
+
 let currentUserId;
 
 let checkInTime = null;
@@ -33,6 +124,12 @@ fetch("http://localhost:8080/users/me", {
 
     document.getElementById("department").value =
     data.department.name;
+
+    if(role === "EMPLOYEE"){
+
+    fetchTasks();
+
+}
 
 });
 
@@ -80,8 +177,11 @@ document.getElementById("checkOutBtn")
 
         return;
     }
+    
 
     // CLEAR OLD ERRORS
+
+    
 
     document.getElementById("statusError")
     .innerText = "";
@@ -129,7 +229,7 @@ document.getElementById("checkOutBtn")
         return;
     }
 
-    if(manager.length < 3){
+    if(role !== "ADMIN" && manager.length < 3){
 
         document.getElementById("managerError")
         .innerText =
@@ -138,7 +238,7 @@ document.getElementById("checkOutBtn")
         return;
     }
 
-    if(remarks !== "" && remarks.length < 3){
+    if(role !== "ADMIN" && remarks !== "" && remarks.length < 3){
 
         document.getElementById("remarksError")
         .innerText =
@@ -230,6 +330,7 @@ document.getElementById("checkOutBtn")
 
     `;
 
+
     // TODAY'S DATE
 
     const today =
@@ -293,3 +394,299 @@ document.getElementById("checkOutBtn")
     });
 
 });
+// ADMIN ASSIGN TASK
+
+const assignTaskBtn =
+document.getElementById("assignTaskBtn");
+
+if(assignTaskBtn){
+
+    assignTaskBtn.addEventListener(
+        "click",
+        function(){
+
+            const employeeId =
+            document.getElementById(
+                "employeeDropdown"
+            ).value;
+
+            const title =
+            document.getElementById(
+                "taskTitle"
+            ).value.trim();
+
+            const description =
+            document.getElementById(
+                "taskDescription"
+            ).value.trim();
+
+            const deadline =
+            document.getElementById(
+                "taskDeadline"
+            ).value;
+
+            document
+            .getElementById("taskSuccessMsg")
+            .innerText = "";
+
+            if(employeeId === ""){
+
+                document
+                .getElementById("taskSuccessMsg")
+                .innerText =
+                "Please select an employee";
+
+                return;
+            }
+
+            if(title === ""){
+
+                document
+                .getElementById("taskSuccessMsg")
+                .innerText =
+                "Please enter task title";
+
+                return;
+            }
+
+            if(description === ""){
+
+                document
+                .getElementById("taskSuccessMsg")
+                .innerText =
+                "Please enter task description";
+
+                return;
+            }
+
+            if(deadline === ""){
+
+                document
+                .getElementById("taskSuccessMsg")
+                .innerText =
+                "Please select deadline";
+
+                return;
+            }
+
+            fetch(
+                "http://localhost:8080/tasks/assign",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                        "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        title: title,
+
+                        description:
+                        description,
+
+                        deadline:
+                        deadline,
+
+                        assignedTo: {
+
+                            userId:
+                            employeeId
+
+                        }
+
+                    })
+
+                }
+            )
+
+            .then(response =>
+                response.json()
+            )
+
+            .then(data => {
+
+                document
+                .getElementById("taskSuccessMsg")
+                .innerText =
+                "Task assigned successfully!";
+
+            })
+
+            .catch(error => {
+
+                console.log(error);
+
+                document
+                .getElementById("taskSuccessMsg")
+                .innerText =
+                "Failed to assign task";
+
+            });
+
+        }
+    );
+}
+
+function fetchTasks(){
+
+    fetch(
+        `http://localhost:8080/tasks/mytasks/${currentUserId}`
+    )
+
+    .then(response => response.json())
+
+    .then(tasks => {
+
+        const container =
+        document.getElementById(
+            "taskContainer"
+        );
+
+        container.innerHTML = "";
+
+        tasks.forEach(task => {
+
+            container.innerHTML += `
+
+                <div class="task-card">
+
+                    <h3>
+                        ${task.title}
+                    </h3>
+
+                    <p>
+                        ${task.description}
+                    </p>
+
+                    <p>
+                        Deadline:
+                        ${task.deadline}
+                    </p>
+
+                    <p>
+                        Status:
+                        ${task.status}
+                    </p>
+
+                    <label>
+                        Hours Spent
+                    </label>
+
+                    <input
+                        type="number"
+                        id="hours-${task.taskId}"
+                        min="0"
+                        step="0.5"
+                        value="${
+                            task.hoursSpent
+                            ? task.hoursSpent
+                            : ''
+                        }"
+                    >
+
+                    <br><br>
+
+                    <label>
+                        Completed
+                    </label>
+
+                    <input
+                        type="checkbox"
+                        id="completed-${task.taskId}"
+                        ${
+                            task.completed
+                            ? "checked"
+                            : ""
+                        }
+                    >
+
+                    <br><br>
+
+                    <button
+                        type="button"
+                        onclick="updateTask(${task.taskId})"
+                    >
+
+                        Update Task
+
+                    </button>
+
+                    <hr>
+
+                </div>
+
+            `;
+
+        });
+
+    })
+
+    .catch(error => {
+
+        console.log(error);
+
+        document.getElementById(
+            "taskContainer"
+        ).innerHTML =
+
+        `<p>
+            Failed to load tasks
+        </p>`;
+
+    });
+
+}
+
+function updateTask(taskId){
+
+    const hoursSpent =document.getElementById(`hours-${taskId}`).value;
+
+    const completed =document.getElementById(`completed-${taskId}`).checked;
+
+    fetch(
+        "http://localhost:8080/tasks/update",
+        {
+            method:"PUT",
+
+            headers:{
+                "Content-Type":
+                "application/json"
+            },
+
+            body: JSON.stringify({
+
+                taskId:taskId,
+
+                hoursSpent:hoursSpent,
+
+                status:completed? "COMPLETED": "IN_PROGRESS",
+
+                completed:completed
+
+            })
+
+        }
+    )
+
+    .then(response =>
+        response.json()
+    )
+
+    .then(data => {
+
+        console.log(data);
+
+        fetchTasks();
+
+    })
+
+    .catch(error => {
+
+        console.log(error);
+
+    });
+
+}
