@@ -45,4 +45,7 @@ public List<LeaveRequests> getMyLeaves(Long userId){
 
     return leaveRequestRepository.findByUser_UserId(userId);
 }
+public List<LeaveRequests> getPendingLeaves(){
+return leaveRequestRepository.findByStatus("PENDING");
+}
 }

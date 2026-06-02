@@ -1,3 +1,21 @@
+
+const token =
+localStorage.getItem("token");
+
+if(token){
+
+    window.location.replace(
+        "index.html"
+    );
+
+}
+else{
+
+    document.getElementById(
+        "loginPage"
+    ).style.display = "block";
+
+}
 document.getElementById("closeBtn").addEventListener("click", function(){
 
     window.location.href =
@@ -58,7 +76,6 @@ document.getElementById("loginForm").addEventListener("submit", function(e){
         valid = false;
     }
 
-    // Success
 
     // Login API Integration
 
@@ -81,36 +98,36 @@ if(valid){
 
     })
 
-    .then(response => response.json())
+    .then(response => {
+
+    if(!response.ok){
+
+        throw new Error(
+            "Invalid email or password"
+        );
+    }
+
+    return response.json();
+
+})
 
 .then(data => {
 
     console.log(data);
 
-    localStorage.setItem(
-        "token",
-        data.token
-    );
+    localStorage.setItem("token", data.token);
 
-    localStorage.setItem(
-        "role",
-        data.role
-    );
-    window.location.href =
-    "index.html";
+    localStorage.setItem("role",data.role);
+    window.location.href ="index.html";
 
-    document.getElementById("successMsg").innerText =
-    "Login Successful!";
-
-
+    document.getElementById("successMsg").innerText ="Login Successful!";
 })
 
     .catch(error => {
 
         console.log(error);
 
-        document.getElementById("successMsg").innerText =
-        "Login Failed";
+        document.getElementById("successMsg").innerText ="Login Failed";
 
     });
 

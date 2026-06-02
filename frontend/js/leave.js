@@ -8,31 +8,24 @@ if(!token){
 }
 else{
 
-    document.getElementById("pageContent")
-    .style.display = "block";
+    document.getElementById("pageContent").style.display = "block";
 }
 
 document.getElementById("closeBtn").addEventListener("click", function(){
 
-    window.location.href =
-    "index.html";
+    window.location.href ="index.html";
 
 });
 
 let currentUserId;
 
-const role =
-localStorage.getItem("role");
+const role =localStorage.getItem("role");
 
 if(role === "HR"){
 
-    document
-    .getElementById("employeeLeaveSection")
-    .style.display = "none";
+    document.getElementById("employeeLeaveSection").style.display = "none";
 
-    document
-    .getElementById("hrLeaveSection")
-    .style.display = "block";
+    document.getElementById("hrLeaveSection").style.display = "block";
 }
 if(role === "HR"){
 
@@ -43,16 +36,13 @@ if(role === "HR"){
     .then(data => {
 
         console.log(data);
-        const container =
-document.getElementById(
-    "leaveRequestsContainer"
-);
+        const container =document.getElementById("leaveRequestsContainer");
 
 data.forEach(leave => {
 
     container.innerHTML += `
 
-        <div>
+        <div id="leave-${leave.leaveRequestId}">
 
             <h3>
                 ${leave.user.full_name}
@@ -62,8 +52,7 @@ data.forEach(leave => {
                 ${leave.leaveType}
             </p>
             <p>
-    Reason:
-    ${leave.reason}
+    Reason:${leave.reason}
 </p>
             <p>
                 ${leave.status}
@@ -111,10 +100,7 @@ fetch("http://localhost:8080/users/me", {
 
     .then(leaves => {
 
-        const container =
-        document.getElementById(
-            "myLeaveContainer"
-        );
+        const container =document.getElementById("myLeaveContainer");
 
         leaves.forEach(leave => {
 
@@ -131,8 +117,7 @@ fetch("http://localhost:8080/users/me", {
                     </p>
 
                     <p>
-                        Status:
-                        ${leave.status}
+                        Status:${leave.status}
                     </p>
 
                 </div>
@@ -203,8 +188,7 @@ document.getElementById("leaveForm").addEventListener("submit", function(e){
 
     if(startDate === ""){
 
-        document.getElementById("startError").innerText =
-        "Select start date";
+        document.getElementById("startError").innerText ="Select start date";
 
         valid = false;
     }
@@ -240,22 +224,17 @@ document.getElementById("leaveForm").addEventListener("submit", function(e){
 
     if(!/^[0-9]{10}$/.test(contact)){
 
-        document.getElementById("contactError").innerText =
-        "Invalid mobile number";
+        document.getElementById("contactError").innerText ="Invalid mobile number";
 
         valid = false;
     }
 
     // Email Validation
 
-    const emailPattern =
-    /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    const emailPattern =/^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
     if(!email.match(emailPattern)){
-
-        document.getElementById("emailError").innerText =
-        "Invalid email";
-
+        document.getElementById("emailError").innerText ="Invalid email";
         valid = false;
     }
 
@@ -265,7 +244,6 @@ document.getElementById("leaveForm").addEventListener("submit", function(e){
 
         document.getElementById("managerError").innerText =
         "Enter valid manager name";
-
         valid = false;
     }
 
@@ -302,7 +280,7 @@ document.getElementById("leaveForm").addEventListener("submit", function(e){
                 reason: reason,
                 status: "PENDING",
                 user: {
-                    user_id: currentUserId
+                    userId: currentUserId
                 }
 
             })
@@ -348,9 +326,14 @@ function approveLeave(id){
 
     .then(data => {
 
-        alert("Leave Approved");
+        document.getElementById(
+            "leaveActionMsg"
+        ).innerText =
+        "Leave approved successfully";
 
-        location.reload();
+        document.getElementById(
+            `leave-${id}`
+        ).remove();
 
     });
 
@@ -369,9 +352,14 @@ function rejectLeave(id){
 
     .then(data => {
 
-        alert("Leave Rejected");
+        document.getElementById(
+            "leaveActionMsg"
+        ).innerText =
+        "Leave rejected successfully";
 
-        location.reload();
+        document.getElementById(
+            `leave-${id}`
+        ).remove();
 
     });
 

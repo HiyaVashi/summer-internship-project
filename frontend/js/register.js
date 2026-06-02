@@ -100,6 +100,38 @@ document.getElementById("password").value.trim();
     valid = false;
 }
 
+else if(!/[A-Z]/.test(password)){
+
+    document.getElementById("passwordError").innerText =
+    "Password must contain at least one uppercase letter";
+
+    valid = false;
+}
+
+else if(!/[a-z]/.test(password)){
+
+    document.getElementById("passwordError").innerText =
+    "Password must contain at least one lowercase letter";
+
+    valid = false;
+}
+
+else if(!/[0-9]/.test(password)){
+
+    document.getElementById("passwordError").innerText =
+    "Password must contain at least one number";
+
+    valid = false;
+}
+
+else if(!/[!@#$%^&*(),.?\":{}|<>]/.test(password)){
+
+    document.getElementById("passwordError").innerText =
+    "Password must contain at least one special character";
+
+    valid = false;
+}
+
     // Mobile Validation
 
     if(!/^[0-9]{10}$/.test(mobile)){
@@ -252,29 +284,20 @@ formData.append("photo", document.getElementById("photo").files[0]);
 
             body:formData
 
-
-
-//             body: JSON.stringify({
-
-//     full_name: name,
-//     gender: gender,
-//     email: email,
-//     password: password,
-//     role: "EMPLOYEE",
-//     mobile_number: mobile,
-//     city: city,
-//     state: state,
-//     address: address,
-//     dob: dob,
-
-//     department: {
-//     department_id: Number(department)
-// }
-
-// })
         })
 
-        .then(response => response.json())
+        .then(response => {
+
+    if(!response.ok){
+
+        throw new Error(
+            "Registration failed"
+        );
+    }
+
+    return response.json();
+
+})
 
         .then(data => {
 

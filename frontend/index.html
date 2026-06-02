@@ -13,7 +13,7 @@
 
 <body>
 
-
+<div id="pageContent">
 <nav class="navbar">
 
   <div class="logo">
@@ -21,8 +21,6 @@
   </div>
 
   <div class="nav-links">
-
-    <a href="loginForm.html">Login</a>
 
     <a href="employeeRegForm.html">
       Employee Registration
@@ -38,9 +36,8 @@
 
   </div>
 
-  <button id="logoutBtn">
-    Log Out
-  </button>
+ <button id="authBtn">LogOut
+</button>
 
 </nav>
 
@@ -214,26 +211,13 @@
 
 </section>
 
-/* FOOTER*/
 
 <footer>
 
   © 2026 Employee Management System | Designed for Workforce Management
 
 </footer>
-
-<script>
-document.getElementById("logoutBtn")
-.addEventListener("click", function(){
-
-    localStorage.removeItem("token");
-
-    localStorage.removeItem("role");
-
-    window.location.href =
-    "loginForm.html";
-
-});
-</script>
+</div>
+<script src="js/index.js"></script>
 </body>
 </html>

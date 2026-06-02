@@ -20,9 +20,6 @@ public class UserService {
 
     public Users registerUser(Users user) {
 
-        user.setPassword(
-            passwordEncoder.encode(user.getPassword())
-        );
         
         if(userRepository
         .findByEmail(user.getEmail())
@@ -31,6 +28,20 @@ public class UserService {
     throw new RuntimeException(
             "Email already exists");
 }
+String password =
+        user.getPassword();
+
+if(!password.matches(
+        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).{8,}$"
+)){
+
+    throw new RuntimeException(
+            "Password must contain uppercase, lowercase, number and special character"
+    );
+}
+        user.setPassword(
+            passwordEncoder.encode(user.getPassword())
+        );
 
         return userRepository.save(user);
     }

@@ -201,6 +201,10 @@
     cursor: pointer;
 }
 
+#loginPage{
+    display:none;
+}
+
     /* Responsive */
 
     @media(max-width:900px){
