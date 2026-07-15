@@ -44,8 +44,7 @@ public LeaveRequests approveLeave(@PathVariable Long id){
 }
 
 @PutMapping("/reject/{id}")
-public LeaveRequests rejectLeave( @PathVariable Long id){
-
+public LeaveRequests rejectLeave( @PathVariable Long id){ 
     return leaveService.rejectLeave(id);
 }
 

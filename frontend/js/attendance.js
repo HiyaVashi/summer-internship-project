@@ -24,6 +24,21 @@ const role =localStorage.getItem("role");
 
 if(role === "ADMIN"){
 
+    document.getElementById(
+        "aiReportSection"
+    ).style.display = "block";
+
+}
+else{
+
+    document.getElementById(
+        "aiReportSection"
+    ).style.display = "none";
+
+}
+
+if(role === "ADMIN"){
+
     document.getElementById("adminTaskSection")
     .style.display = "block";
 
@@ -40,31 +55,51 @@ if(role === "ADMIN"){
 
     fetch("http://localhost:8080/users/employees")
 
-    .then(response => response.json())
+.then(response => response.json())
 
-    .then(data => {
+.then(data => {
 
-        const dropdown =
-        document.getElementById(
-            "employeeDropdown"
-        );
+    const taskDropdown =
+    document.getElementById(
+        "employeeDropdown"
+    );
 
-        data.forEach(employee => {
+    const reportDropdown =
+    document.getElementById(
+        "reportEmployeeDropdown"
+    );
 
-            const option =
-            document.createElement("option");
+    data.forEach(employee => {
 
-            option.value =
-            employee.userId;
+        // Task Assignment Dropdown
 
-            option.textContent =
-            employee.full_name;
+        const taskOption =
+        document.createElement("option");
 
-            dropdown.appendChild(option);
+        taskOption.value =
+        employee.userId;
 
-        });
+        taskOption.textContent =
+        employee.full_name;
+
+        taskDropdown.appendChild(taskOption);
+
+        // AI Report Dropdown
+
+        const reportOption =
+        document.createElement("option");
+
+        reportOption.value =
+        employee.userId;
+
+        reportOption.textContent =
+        employee.full_name;
+
+        reportDropdown.appendChild(reportOption);
 
     });
+
+});
 }
 
 else if(role === "EMPLOYEE"){
@@ -690,3 +725,71 @@ function updateTask(taskId){
     });
 
 }
+
+const generateReportBtn =
+document.getElementById("generateReportBtn");
+
+if(generateReportBtn){
+
+    generateReportBtn.addEventListener("click", function(){
+
+        const employeeId =
+        document.getElementById(
+            "reportEmployeeDropdown"
+        ).value;
+
+        if(employeeId === ""){
+
+            document.getElementById(
+                "reportLoading"
+            ).innerText =
+            "Please select an employee.";
+
+            return;
+
+        }
+
+        document.getElementById(
+            "reportLoading"
+        ).innerText =
+        "Generating AI Report...";
+
+        fetch(
+            `http://localhost:8080/ai/report/${employeeId}`,
+            {
+
+                method:"POST"
+
+            }
+
+        )
+
+        .then(response => response.text())
+
+        .then(report => {
+
+            document.getElementById(
+                "reportLoading"
+            ).innerText = "";
+
+            document.getElementById(
+                "reportContainer"
+            ).innerText = report;
+
+        })
+
+        .catch(error => {
+
+            console.log(error);
+
+            document.getElementById(
+                "reportLoading"
+            ).innerText =
+            "Failed to generate report.";
+
+        });
+
+    });
+
+}
+

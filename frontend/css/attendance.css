@@ -175,6 +175,56 @@
     font-family: inherit;
 }
 
+#aiReportSection{
+
+    margin-top:40px;
+
+    padding:20px;
+
+    background:white;
+
+    border-radius:12px;
+
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+
+}
+
+#generateReportBtn{
+
+    margin-top:20px;
+
+    width:100%;
+
+}
+
+#reportContainer{
+
+    margin-top:20px;
+
+    white-space:pre-wrap;
+
+    line-height:1.8;
+
+    background:#f8f9fa;
+
+    padding:20px;
+
+    border-radius:10px;
+
+    min-height:250px;
+
+}
+
+#reportLoading{
+
+    margin-top:15px;
+
+    color:#007bff;
+
+    font-weight:bold;
+
+}
+
 #taskSuccessMsg{
 
     margin-top: 15px;

@@ -37,6 +37,7 @@ document.getElementById("loginForm").addEventListener("submit", function(e){
     document.getElementById("emailError").innerText = "";
     document.getElementById("passwordError").innerText = "";
     document.getElementById("successMsg").innerText = "";
+    document.getElementById("loginError").innerText = "";
 
     // Email Validation
 
@@ -121,13 +122,14 @@ if(valid){
     window.location.href ="index.html";
 
     document.getElementById("successMsg").innerText ="Login Successful!";
+    
 })
 
     .catch(error => {
 
         console.log(error);
 
-        document.getElementById("successMsg").innerText ="Login Failed";
+        document.getElementById("loginError").innerText ="Invalid credentials";
 
     });
 
