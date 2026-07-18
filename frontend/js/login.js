@@ -16,12 +16,23 @@ else{
     ).style.display = "block";
 
 }
-document.getElementById("closeBtn").addEventListener("click", function(){
+// document.getElementById("closeBtn").addEventListener("click", function(){
 
-    window.location.href =
-    "index.html";
+//     window.location.href =
+//     "index.html";
 
-});
+// });
+const closeBtn = document.getElementById("closeBtn");
+
+if (closeBtn) {
+
+    closeBtn.addEventListener("click", function () {
+
+        window.location.href = "index.html";
+
+    });
+
+}
 
 document.getElementById("loginForm").addEventListener("submit", function(e){
 

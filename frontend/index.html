@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -41,8 +41,7 @@
 
 </nav>
 
-<!-- HERO SECTION -->
-
+ 
 <section class="hero">
 
   <div class="hero-content">
@@ -71,7 +70,7 @@
 
   </div>
 
-  <!-- RIGHT CARD -->
+
 
   <div class="hero-card">
 
@@ -111,7 +110,7 @@
 
 </section>
 
-<!-- MODULES -->
+
 
 <section class="features" id="modules">
 
@@ -127,7 +126,7 @@
 
   <div class="cards">
 
-    <!-- LOGIN -->
+    
 
     <div class="card">
 
@@ -147,7 +146,7 @@
 
     </div>
 
-    <!-- REGISTRATION -->
+    
 
     <div class="card">
 
@@ -167,7 +166,7 @@
 
     </div>
 
-    <!-- ATTENDANCE -->
+   
 
     <div class="card">
 
@@ -187,7 +186,7 @@
 
     </div>
 
-    <!-- LEAVE -->
+   
 
     <div class="card">
 
@@ -220,4 +219,370 @@
 </div>
 <script src="js/index.js"></script>
 </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Management System</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="css/index.css">
+
+</head>
+
+<body>
+
+<div id="pageContent">
+
+<header class="topbar">
+
+    <div class="logo">
+
+        <i class="fa-solid fa-building"></i>
+
+        EMS Portal
+
+    </div>
+
+    <div class="topbar-right">
+
+        <span id="welcomeText">
+
+            Welcome 
+
+        </span>
+
+        <button id="authBtn">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<div class="dashboard">
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+    <h3>
+
+        Main Menu
+
+    </h3>
+
+    <a href="employeeRegForm.html">
+
+        <i class="fa-solid fa-user-plus"></i>
+
+        Employee Registration
+
+    </a>
+
+    <a href="attendanceForm.html">
+
+        <i class="fa-solid fa-calendar-check"></i>
+
+        Attendance
+
+    </a>
+
+    <a href="leaveApplicationForm.html">
+
+        <i class="fa-solid fa-file-circle-check"></i>
+
+        Leave Management
+
+    </a>
+
+    <a href="loginForm.html">
+
+        <i class="fa-solid fa-right-to-bracket"></i>
+
+        Login
+
+    </a>
+
+</aside>
+
+
+
+<!-- Main -->
+
+<main class="content">
+
+<section class="welcome">
+
+    <h1>
+
+        Employee Management Dashboard
+
+    </h1>
+
+    <p>
+
+        Manage employees, attendance, leave requests and AI powered reports
+        from one centralized workspace.
+
+    </p>
+
+</section>
+
+
+
+<!-- Quick Actions -->
+
+<section>
+
+<h2 class="section-heading">
+
+Quick Access
+
+</h2>
+
+<div class="quick-grid">
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-user-plus"></i>
+
+<h3>
+
+Employee Registration
+
+</h3>
+
+<p>
+
+Register new employees and manage personal details.
+
+</p>
+
+<a href="employeeRegForm.html">
+
+Open Module
+
+</a>
+
+</div>
+
+
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-calendar-check"></i>
+
+<h3>
+
+Attendance
+
+</h3>
+
+<p>
+
+Track employee attendance and working hours.
+
+</p>
+
+<a href="attendanceForm.html">
+
+Open Module
+
+</a>
+
+</div>
+
+
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-file-circle-check"></i>
+
+<h3>
+
+Leave Management
+
+</h3>
+
+<p>
+
+Submit, approve and manage leave applications.
+
+</p>
+
+<a href="leaveApplicationForm.html">
+
+Open Module
+
+</a>
+
+</div>
+
+
+
+<div class="dashboard-card"
+     id="aiCard">
+
+<i class="fa-solid fa-robot"></i>
+
+<h3>
+
+AI Reports
+
+</h3>
+
+<p>
+
+Generate AI-powered employee performance reports.
+
+</p>
+
+<a href="attendanceForm.html">
+
+Generate Report
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- About -->
+
+<section class="about-card">
+
+<h2>Workspace Overview</h2>
+
+<div class="about-grid">
+
+<div>
+
+<h4>
+
+✔ Secure Authentication
+
+</h4>
+
+<p>
+
+Role-based login with JWT authentication.
+
+</p>
+
+</div>
+
+<div>
+
+<h4>
+
+✔ Attendance Tracking
+
+</h4>
+
+<p>
+
+Check-in, check-out and attendance history.
+
+</p>
+
+</div>
+
+<div>
+
+<h4>
+
+✔ Leave Workflow
+
+</h4>
+
+<p>
+
+Employees apply while HR/Admin approves digitally.
+
+</p>
+
+</div>
+
+<div>
+
+<h4>
+
+✔ AI Analytics
+
+</h4>
+
+<p>
+
+Generate performance reports.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+
+
+<footer>
+
+© 2026 Employee Management System
+
+</footer>
+
+</div>
+
+
+
+<script>
+
+const role = localStorage.getItem("role");
+
+if(role !== "ADMIN"){
+
+    document.getElementById("aiCard").style.display="none";
+
+}
+
+</script>
+
+<script src="js/index.js"></script>
+
+</body>
+
 </html>

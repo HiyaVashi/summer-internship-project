@@ -1,233 +1,80 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Leave Management</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/leave.css">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Leave Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link rel="stylesheet" href="css/leave.css">
 </head>
-
 <body>
 <div id="pageContent">
-<div class="container">
+<header class="topbar">
+<div class="logo"><i class="fa-solid fa-building"></i> EMS Portal</div>
+<a href="index.html" id="closeBtn">← Dashboard</a>
+</header>
 
-  <!-- LEFT -->
+<div class="dashboard">
+<aside class="sidebar">
+<h3>Navigation</h3>
+<a href="index.html">Dashboard</a>
+<a href="employeeRegForm.html">Employee Registration</a>
+<a href="attendanceForm.html">Attendance</a>
+<a class="active">Leave Management</a>
+</aside>
 
-  <div class="left-panel">
+<main class="content">
+<div class="card">
+<h1>Leave Management</h1>
+<p class="subtitle">Submit and manage leave requests.</p>
 
-    <div class="icon-circle">
-      📝
-    </div>
-
-    <h1>Leave Portal</h1>
-
-    <p>
-      Submit employee leave applications,
-      manage approvals and maintain leave
-      records securely within the organization.
-    </p>
-
-  </div>
-
-  <!-- RIGHT -->
-
-  <div class="right-panel">
-
-    <h2>Leave Management</h2>
-
-    <p class="subtitle">
-      Submit and manage employee leave requests
-    </p>
 <div id="employeeLeaveSection">
-    <form id="leaveForm">
-
-      <div class="form-grid">
-
-        <!-- Employee ID -->
-
-        <div class="form-group">
-
-          <label>Employee ID</label>
-
-          <input 
-            type="text"
-            id="employeeId"
-            readonly
-          >
-
-        </div>
-
-        <!-- Employee Name -->
-
-        <div class="form-group">
-
-          <label>Employee Name</label>
-
-          <input 
-            type="text"
-            id="employeeName"
-            id="employeeName"
-            readonly
-          >
-
-        </div>
-
-        <!-- Department -->
-
-        <div class="form-group">
-
-          <label>Department</label>
-
-          <input 
-            type="text"
-            id="department"
-            readonly
-          >
-
-        </div>
-
-        <!-- Leave Type -->
-
-        <div class="form-group">
-
-          <label>Leave Type</label>
-
-          <select id="leaveType">
-
-            <option value="">Select</option>
-            <option>Sick Leave</option>
-            <option>Casual Leave</option>
-            <option>Paid Leave</option>
-            <option>Emergency Leave</option>
-
-          </select>
-
-          <div class="error" id="leaveTypeError"></div>
-
-        </div>
-
-        <!-- Start Date -->
-
-        <div class="form-group">
-
-          <label>Start Date</label>
-
-          <input type="date" id="startDate">
-
-          <div class="error" id="startError"></div>
-
-        </div>
-
-        <!-- End Date -->
-
-        <div class="form-group">
-
-          <label>End Date</label>
-
-          <input type="date" id="endDate">
-
-          <div class="error" id="endError"></div>
-
-        </div>
-
-        <!-- Contact -->
-
-        <div class="form-group">
-
-          <label>Contact Number</label>
-
-          <input type="text" id="contact" placeholder="9876543210">
-
-          <div class="error" id="contactError"></div>
-
-        </div>
-
-        <!-- Alternate Email -->
-
-        <div class="form-group">
-
-          <label>Alternate Email</label>
-
-          <input type="email" id="email" placeholder="example@gmail.com">
-
-          <div class="error" id="emailError"></div>
-
-        </div>
-
-        <!-- Reporting Manager -->
-
-        <div class="form-group">
-
-          <label>Reporting Manager</label>
-
-          <input type="text" id="manager" placeholder="Manager Name">
-
-          <div class="error" id="managerError"></div>
-
-        </div>
-
-        <!-- Reason -->
-
-        <div class="form-group full-width">
-
-          <label>Reason for Leave</label>
-
-          <textarea 
-            id="reason"
-            placeholder="Enter leave reason"
-          ></textarea>
-
-          <div class="error" id="reasonError"></div>
-
-        </div>
-
-      </div>
-
-      <button type="submit" class="submit-btn">
-        Submit Leave Request
-      </button>
-
-      <div class="success" id="successMsg"></div>
-
-    </form>
-    <div id="myLeaveStatusSection">
-
-        <h2>My Leave Requests</h2>
-
-        <div id="myLeaveContainer">
-
-        </div>
-
-    </div>
+<form id="leaveForm">
+
+<section class="section">
+<h2>Employee Details</h2>
+<div class="form-grid">
+<div class="form-group"><label>Employee ID</label><input id="employeeId" readonly></div>
+<div class="form-group"><label>Employee Name</label><input id="employeeName" readonly></div>
+<div class="form-group"><label>Department</label><input id="department" readonly></div>
 </div>
-<div id="hrLeaveSection"
-     style="display:none;">
+</section>
 
-    <h2>Manage Leave Requests</h2>
+<section class="section">
+<h2>Leave Application</h2>
+<div class="form-grid">
+<div class="form-group"><label>Leave Type</label><select id="leaveType"><option value="">Select</option><option>Sick Leave</option><option>Casual Leave</option><option>Paid Leave</option><option>Emergency Leave</option></select><div class="error" id="leaveTypeError"></div></div>
+<div class="form-group"><label>Start Date</label><input type="date" id="startDate"><div class="error" id="startError"></div></div>
+<div class="form-group"><label>End Date</label><input type="date" id="endDate"><div class="error" id="endError"></div></div>
+<div class="form-group"><label>Contact Number</label><input id="contact"><div class="error" id="contactError"></div></div>
+<div class="form-group"><label>Alternate Email</label><input type="email" id="email"><div class="error" id="emailError"></div></div>
+<div class="form-group"><label>Reporting Manager</label><input id="manager"><div class="error" id="managerError"></div></div>
+<div class="form-group full-width"><label>Reason for Leave</label><textarea id="reason"></textarea><div class="error" id="reasonError"></div></div>
+</div>
+<button type="submit" class="submit-btn">Submit Leave Request</button>
+<div id="successMsg" class="success"></div>
+</section>
 
-    <div
-        id="leaveActionMsg"
-        class="success">
-    </div>
+<section class="section" id="myLeaveStatusSection">
+<h2>My Leave Requests</h2>
+<div id="myLeaveContainer" class="display-box"></div>
+</section>
+</form>
+</div>
 
-    <div id="leaveRequestsContainer">
-
-    </div>
+<section class="section" id="hrLeaveSection" style="display:none;">
+<h2>Manage Leave Requests</h2>
+<div id="leaveActionMsg" class="success"></div>
+<div id="leaveRequestsContainer" class="display-box"></div>
+</section>
 
 </div>
-  </div>
-
+</main>
 </div>
-<button type="button" id="closeBtn">
-
-    ← Dashboard
-
-</button>
 <script src="js/leave.js"></script>
 </div>
 </body>

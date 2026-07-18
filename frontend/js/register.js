@@ -1,9 +1,14 @@
-document.getElementById("closeBtn").addEventListener("click", function(){
+const closeBtn = document.getElementById("closeBtn");
 
-    window.location.href =
-    "index.html";
+if(closeBtn){
 
-});
+    closeBtn.addEventListener("click", function(){
+
+        window.location.href = "index.html";
+
+    });
+
+}
 document.getElementById("registrationForm").addEventListener("submit", function(e){
 
     e.preventDefault();
@@ -278,47 +283,50 @@ formData.append("photo", document.getElementById("photo").files[0]);
 
     if(valid){
 
-        fetch("http://localhost:8080/users/register", {
+    fetch("http://localhost:8080/users/register", {
 
-            method: "POST",
+        method: "POST",
 
-            body:formData
+        body: formData
 
-        })
+    })
 
-        .then(response => {
+    .then(response => {
 
-    if(!response.ok){
+        if(!response.ok){
 
-        throw new Error(
-            "Registration failed"
-        );
+            throw new Error("Registration Failed");
+
+        }
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        const msg = document.getElementById("successMsg");
+
+        msg.style.color = "green";
+        msg.innerText = "Employee Registered Successfully!";
+
+        document.getElementById("registrationForm").reset();
+
+    })
+
+    .catch(error => {
+
+        const msg = document.getElementById("successMsg");
+
+        msg.style.color = "red";
+        msg.innerText = "Registration Failed";
+
+        console.error(error);
+
+    });
+
+}
+
     }
 
-    return response.json();
-
-})
-
-        .then(data => {
-
-            console.log(data);
-
-            document.getElementById("successMsg").innerText =
-            "Employee Registered Successfully!";
-
-            document.getElementById("registrationForm").reset();
-
-        })
-
-        .catch(error => {
-
-            console.log(error);
-
-            document.getElementById("successMsg").innerText =
-            "Registration Failed";
-
-        });
-
-    }
-
-});
+);

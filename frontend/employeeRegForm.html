@@ -3,262 +3,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <title>Employee Registration</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/register.css">
-
+  <button id="closeBtn" style="display:none;"></button>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Registration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link rel="stylesheet" href="css/register.css">
 </head>
-
 <body>
+<div id="pageContent">
+<header class="topbar">
+<div class="logo"><i class="fa-solid fa-building"></i> EMS Portal</div>
+<div><a class="back-link" href="index.html"><i class="fa-solid fa-arrow-left"></i> Dashboard</a></div>
+</header>
 
-<div class="container">
+<div class="dashboard">
+<aside class="sidebar">
+<h3>Main Menu</h3>
+<a class="active"><i class="fa-solid fa-user-plus"></i> Employee Registration</a>
+<a href="attendanceForm.html"><i class="fa-solid fa-calendar-check"></i> Attendance</a>
+<a href="leaveApplicationForm.html"><i class="fa-solid fa-file-circle-check"></i> Leave Management</a>
+<a href="loginForm.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+</aside>
 
-  <!-- LEFT -->
+<main class="content">
+<div class="card">
+<h1>Employee Registration</h1>
+<p class="subtitle">Add a new employee to the Employee Management System.</p>
 
-  <div class="left-panel">
+<form id="registrationForm">
 
-    <div class="icon-circle">
-      👨‍💼
-    </div>
-
-    <h1>Employee Portal</h1>
-
-    <p>
-      Register employees, manage workforce information,
-      departments, contact details and official records
-      securely within the organization.
-    </p>
-
-  </div>
-
-  <!-- RIGHT -->
-
-  <div class="right-panel">
-
-    <h2>Employee Registration</h2>
-
-    <p class="subtitle">
-      Add employee information into the management system
-    </p>
-
-    <form id="registrationForm">
-
-      <div class="form-grid">
-
-        <!-- Employee ID -->
-
-        <div class="form-group">
-
-          <label>Employee ID</label>
-
-          <input type="text" id="employeeId" placeholder="EMP1023">
-
-          <div class="error" id="idError"></div>
-
-        </div>
-
-        <!-- Full Name -->
-
-        <div class="form-group">
-
-          <label>Full Name</label>
-
-          <input type="text" id="name" placeholder="Enter full name">
-
-          <div class="error" id="nameError"></div>
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label>Email</label>
-
-          <input type="email" id="email" placeholder="Enter email">
-
-          <div class="error" id="emailError"></div>
-
-        </div>
-        <div class="mb-3">
-
-    <label>Password</label>
-
-    <input type="password"
-           id="password"
-           class="form-control">
-
-    <small id="passwordError"
-           class="error text-danger"></small>
-
+<section class="section">
+<h2><i class="fa-solid fa-user"></i> Personal Information</h2>
+<div class="grid">
+<div class="form-group"><label>Employee ID</label><input id="employeeId"><div class="error" id="idError"></div></div>
+<div class="form-group"><label>Full Name</label><input id="name"><div class="error" id="nameError"></div></div>
+<div class="form-group"><label>Email</label><input type="email" id="email"><div class="error" id="emailError"></div></div>
+<div class="form-group"><label>Password</label><input type="password" id="password"><div class="error" id="passwordError"></div></div>
+<div class="form-group"><label>Mobile</label><input id="mobile"><div class="error" id="mobileError"></div></div>
+<div class="form-group"><label>Gender</label><select id="gender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select><div class="error" id="genderError"></div></div>
+<div class="form-group"><label>Date of Birth</label><input type="date" id="dob"><div class="error" id="dobError"></div></div>
 </div>
-
-
-        <div class="form-group">
-
-          <label>Mobile Number</label>
-
-          <input type="text" id="mobile" placeholder="9876543210">
-
-          <div class="error" id="mobileError"></div>
-
-        </div>
-
-        <!-- Gender -->
-
-        <div class="form-group">
-
-          <label>Gender</label>
-
-          <select id="gender">
-
-            <option value="">Select</option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-
-          </select>
-
-          <div class="error" id="genderError"></div>
-
-        </div>
-
-        <!-- DOB -->
-
-        <div class="form-group">
-
-          <label>Date of Birth</label>
-
-          <input type="date" id="dob">
-
-          <div class="error" id="dobError"></div>
-
-        </div>
-
-        <!-- Department -->
-
-        <div class="form-group">
-
-          <label>Department</label>
-
-          <select id="department">
-
-            <option value="">Select</option>
-            <option value="1">Marketing</option>
-            <option value="2">IT</option>
-            <option value="3">HR</option>
-            <option value="4">Finance</option>
-
-          </select>
-
-          <div class="error" id="departmentError"></div>
-
-        </div>
-
-        <!-- Designation -->
-
-        <div class="form-group">
-
-          <label>Designation</label>
-
-          <input type="text" id="designation" placeholder="Software Engineer">
-
-          <div class="error" id="designationError"></div>
-
-        </div>
-
-        <!-- Joining Date -->
-
-        <div class="form-group">
-
-          <label>Joining Date</label>
-
-          <input type="date" id="joiningDate">
-
-          <div class="error" id="joiningError"></div>
-
-        </div>
-
-        <!-- Salary -->
-
-        <div class="form-group">
-
-          <label>Salary</label>
-
-          <input type="number" id="salary" placeholder="50000">
-
-          <div class="error" id="salaryError"></div>
-
-        </div>
-
-        <!-- City -->
-
-        <div class="form-group">
-
-          <label>City</label>
-
-          <input type="text" id="city" placeholder="Enter city">
-
-          <div class="error" id="cityError"></div>
-
-        </div>
-
-        <!-- State -->
-
-        <div class="form-group">
-
-          <label>State</label>
-
-          <input type="text" id="state" placeholder="Enter state">
-
-          <div class="error" id="stateError"></div>
-
-        </div>
-
-        <!-- Address -->
-
-        <div class="form-group full-width">
-
-          <label>Address</label>
-
-          <textarea id="address" placeholder="Enter address"></textarea>
-
-          <div class="error" id="addressError"></div>
-
-        </div>
-
-        <!-- Upload -->
-
-        <div class="form-group full-width">
-
-          <label>Upload Profile Photo</label>
-
-          <input type="file" id="photo" accept=".jpg, .jpeg, .png">
-
-        </div>
-
-      </div>
-
-      <button type="submit" class="submit-btn">
-        Register Employee
-      </button>
-
-      <div class="success" id="successMsg"></div>
-
-    </form>
-
-  </div>
-
+</section>
+
+<section class="section">
+<h2><i class="fa-solid fa-briefcase"></i> Employment Details</h2>
+<div class="grid">
+<div class="form-group"><label>Department</label><select id="department"><option value="">Select</option><option value="1">Marketing</option><option value="2">IT</option><option value="3">HR</option><option value="4">Finance</option></select><div class="error" id="departmentError"></div></div>
+<div class="form-group"><label>Designation</label><input id="designation"><div class="error" id="designationError"></div></div>
+<div class="form-group"><label>Joining Date</label><input type="date" id="joiningDate"><div class="error" id="joiningError"></div></div>
+<div class="form-group"><label>Salary</label><input type="number" id="salary"><div class="error" id="salaryError"></div></div>
+<div class="form-group"><label>Profile Photo</label><input type="file" id="photo" accept=".jpg,.jpeg,.png"></div>
 </div>
-<button type="button" id="closeBtn">
+</section>
 
-    ← Dashboard
+<section class="section">
+<h2><i class="fa-solid fa-location-dot"></i> Address</h2>
+<div class="grid">
+<div class="form-group"><label>City</label><input id="city"><div class="error" id="cityError"></div></div>
+<div class="form-group"><label>State</label><input id="state"><div class="error" id="stateError"></div></div>
+<div class="form-group full"><label>Address</label><textarea id="address"></textarea><div class="error" id="addressError"></div></div>
+</div>
+</section>
 
-</button>
+<button class="submit-btn" type="submit">Register Employee</button>
+<div id="successMsg" class="success"></div>
+
+</form>
+</div>
+</main>
+</div>
+<footer>© 2026 Employee Management System</footer>
+</div>
 <script src="js/register.js"></script>
 </body>
 </html>
